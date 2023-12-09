@@ -109,6 +109,9 @@
             two="";
            
             ans=eval(ans);
+            if (ans % 1 !== 0 && ans.toString().split('.')[1].length > 5) {
+            ans = ans.toFixed(5);
+        }
             result.innerText=ans;
         
           }else{
@@ -127,6 +130,19 @@
               
             }else{
               two/=100;
+
+              result.innerText=two;
+          
+            }
+        }
+        function funcpoint(){
+            if(operator==="" || operator==="="){
+                ans=ans+'.';
+               result.innerText=ans;
+
+              
+            }else{
+              two=two+'.';
               result.innerText=two;
           
             }
@@ -134,6 +150,7 @@
         allbtns[0].addEventListener('click',funcAC);
         allbtns[1].addEventListener('click',funcNeg);
         allbtns[2].addEventListener('click',funcper);
+        allbtns[17].addEventListener('click',funcpoint);
         for(let number of allnums){
   
             number.addEventListener('click',function(){

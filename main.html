@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+
+</head>
+<body>
+    <div id="calculator">
+        <div id="heading"><h1>CALCULATOR</h1></div>
+        <div id="result"></div>
+        <div id="keyboard">
+            <div class="row" id="row1">
+                <div class="col" id="ac">AC</div>
+                <div class="col" id="op+/-">+/-</div>
+                <div class="col" id="op%">%</div>
+                <div class="col side" id="op/">/</div>
+            </div>
+            <div class="row" id="row2">
+                <div class="col num" id="num7">7</div>
+                <div class="col num" id="num8">8</div>
+                <div class="col num" id="num9">9</div>
+                <div class="col side" id="op*">*</div>
+            </div>
+            <div class="row" id="row3">
+                <div class="col num" id="num4">4</div>
+                <div class="col num" id="num5">5</div>
+                <div class="col num" id="num6">6</div>
+                <div class="col side" id="op-">-</div>
+            </div>
+            <div class="row" id="row4">
+                <div class="col num" id="num1">1</div>
+                <div class="col num" id="num2">2</div>
+                <div class="col num" id="num3">3</div>
+                <div class="col side" id="op+">+</div>
+            </div>
+            <div class="row" id="row4">
+                <div class="col num" id="num0">0</div>
+   
+                <div class="col" id="op.">.</div>
+                <div class="col side" id="op=">=</div>
+            </div>
+            
+        </div>
+        
+    </div>
+
+
+
+    <script>
+        var allbtns=document.getElementsByClassName('col');
+        var allnums=document.getElementsByClassName('num');
+        var allops=document.getElementsByClassName('side');
+        var result=document.getElementById('result');
+        var ans="";
+        var two="";
+        var operator="";
+        function funcAC(){
+           result.innerText="";
+           ans="";
+           two="";
+           operator="";
+     
+        }
+        function funcNeg(){
+           if(operator==="" || operator==="="){
+                if(ans[0]=='-'){
+                    ans=ans.substr(1);
+                }else if(ans!=""){
+                    ans='-'+ans;
+                }
+            result.innerText=ans;
+           }else{
+            if(two[0]=='-'){
+            two=two.substr(1);
+           }else{
+            two='-'+two;
+           }
+           
+            result.innerText=two;
+           }
+     
+        }
+        function funcNum(val){
+            if(operator==="="){
+             ans=val;
+
+             two="";
+             operator="";
+             result.innerText=ans;
+            }
+            else if(operator===""){
+                ans=ans+val;
+               result.innerText=ans;
+              
+            }else{
+              two+=val;
+              result.innerText=two;
+          
+            }
+         
+        }
+        function funcOp(val){
+          if(val==="="){
+            ans+=two;
+            operator="=";
+            two="";
+           
+            ans=eval(ans);
+            result.innerText=ans;
+        
+          }else{
+            ans=eval(ans+two);
+            two="";
+            result.innerText=ans;
+            operator=val;
+            ans+=val;
+          }
+           
+        }
+        function funcper(){
+            if(operator==="" || operator==="="){
+                ans=ans/100;
+               result.innerText=ans;
+              
+            }else{
+              two/=100;
+              result.innerText=two;
+          
+            }
+        }
+        allbtns[0].addEventListener('click',funcAC);
+        allbtns[1].addEventListener('click',funcNeg);
+        allbtns[2].addEventListener('click',funcper);
+        for(let number of allnums){
+  
+            number.addEventListener('click',function(){
+                funcNum(number.innerText);
+            });
+        }
+        for(let op of allops){
+  
+            op.addEventListener('click',function(){
+                funcOp(op.innerText);
+            });
+        }
+       
+        
+    </script>
+</body>
+</html>
